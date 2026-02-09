@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Galaxy from "../../../components/Galaxy";
 import SparklesText from "../../../components/sparkles-text";
 import { FlipWords } from "../../../components/flip-words";
 
@@ -31,12 +30,10 @@ export default function Hero() {
 };`;
 
   return (
-    <section className="bg-[#020617] text-white min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-0 overflow-hidden">
-
-      {/* Galaxy Background */}
-      <div className="absolute inset-0 z-0">
-        <Galaxy />
-      </div>
+    <section
+      id="home"
+      className="bg-transparent text-white min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-0 overflow-hidden"
+    >
 
       {/* Main content container */}
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between relative z-10 w-full h-full">
