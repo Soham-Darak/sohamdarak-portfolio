@@ -186,6 +186,7 @@ export default function Galaxy({
   rotationSpeed = 0.1,
   autoCenterRepulsion = 0,
   transparent = true,
+  backgroundColor,
   ...rest
 }) {
   const ctnDom = useRef(null);
@@ -208,7 +209,12 @@ export default function Galaxy({
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       gl.clearColor(0, 0, 0, 0);
     } else {
-      gl.clearColor(0, 0, 0, 1);
+      if (backgroundColor) {
+        const bg = new Color(backgroundColor);
+        gl.clearColor(bg[0], bg[1], bg[2], 1);
+      } else {
+        gl.clearColor(0, 0, 0, 1);
+      }
     }
 
     let program;
@@ -321,7 +327,8 @@ export default function Galaxy({
     rotationSpeed,
     repulsionStrength,
     autoCenterRepulsion,
-    transparent
+    transparent,
+    backgroundColor
   ]);
 
   return <div ref={ctnDom} className="w-full h-full relative" {...rest} />;

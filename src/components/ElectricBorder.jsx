@@ -192,9 +192,16 @@ const ElectricBorder = ({
     };
 
     let { width, height } = updateSize();
+    let isVisible = false;
 
     const drawElectricBorder = currentTime => {
       if (!canvas || !ctx) return;
+      if (!isVisible) {
+        // If not visible, stop loop but keep ref null so it restarts naturally if logic allows.
+        // Or better: don't request next frame.
+        animationRef.current = null;
+        return;
+      }
 
       const deltaTime = (currentTime - lastFrameTimeRef.current) / 1000;
       timeRef.current += deltaTime * speed;
@@ -220,7 +227,8 @@ const ElectricBorder = ({
       const radius = Math.min(borderRadius, maxRadius);
 
       const approximatePerimeter = 2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
-      const sampleCount = Math.floor(approximatePerimeter / 2);
+      // Optimize sample count: Divide by 4 instead of 2 for better performance
+      const sampleCount = Math.floor(approximatePerimeter / 4);
 
       const drawStroke = (lineWidth, strokeStyle, blur) => {
         ctx.save();
@@ -280,6 +288,20 @@ const ElectricBorder = ({
       animationRef.current = requestAnimationFrame(drawElectricBorder);
     };
 
+    const observer = new IntersectionObserver(([entry]) => {
+      const wasVisible = isVisible;
+      isVisible = entry.isIntersecting;
+
+      if (isVisible && !wasVisible) {
+        lastFrameTimeRef.current = performance.now();
+        if (!animationRef.current) {
+          animationRef.current = requestAnimationFrame(drawElectricBorder);
+        }
+      }
+    }, { threshold: 0.1 });
+
+    observer.observe(container);
+
     const resizeObserver = new ResizeObserver(() => {
       const newSize = updateSize();
       width = newSize.width;
@@ -287,12 +309,14 @@ const ElectricBorder = ({
     });
     resizeObserver.observe(container);
 
-    animationRef.current = requestAnimationFrame(drawElectricBorder);
+    // Initial check (observer will likely fire, but to be safe)
+    // Actually observer fires immediately with initial state.
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      observer.disconnect();
       resizeObserver.disconnect();
     };
   }, [color, speed, chaos, borderRadius, octavedNoise, getRoundedRectPoint]);

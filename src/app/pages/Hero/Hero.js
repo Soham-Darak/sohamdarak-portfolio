@@ -54,8 +54,8 @@ export default function Hero() {
               <SparklesText text="Hello" />
               <span className="relative inline-block mt-2">
                 I&apos;m
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 ml-3">
-                  Soham <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 ml-6">
+                  Soham
                   Darak
                 </span>
               </span>
