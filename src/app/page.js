@@ -1,10 +1,12 @@
 import Hero from "@/app/pages/Hero/Hero";
+import AboutMe from "@/app/pages/aboutme/aboutme";
 import SkillsSection from "@/app/pages/Skills/Skills";
 import EducationLoader from "@/components/EducationLoader";
 export default function Home() {
     return (
         <>
             <Hero />
+            <AboutMe />
             <SkillsSection />
             <section id="experience" className="min-h-screen flex items-center justify-center text-white">
                 <h2 className="text-3xl font-bold">Experience Section (Coming Soon)</h2>
