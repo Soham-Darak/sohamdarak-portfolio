@@ -9,8 +9,7 @@ export default function Header() {
 
   const navLinks = useMemo(
     () => [
-      { id: "home", icon: FaHome, text: "Home" },
-      { id: "about", icon: FaCode, text: "About" },
+      { id: "home", icon: FaHome, text: "Hero" },
       { id: "skills", icon: FaCode, text: "Skills" },
       { id: "experience", icon: FaBriefcase, text: "Experience" },
       { id: "education", icon: FaGraduationCap, text: "Education" },

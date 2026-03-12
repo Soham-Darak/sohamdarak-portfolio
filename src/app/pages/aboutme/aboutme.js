@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import ProfileCard from "@/components/ProfileCard/ProfileCard";
-
+import TextType from "@/components/TextType";
 export default function AboutMe() {
     return (
         <div className="mt-10 sm:mt-15 mx-4 sm:mx-auto w-full max-w-[1600px] relative px-4 sm:px-8">
@@ -19,16 +19,17 @@ export default function AboutMe() {
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-5">
                                 About Me
                             </h2>
-
-                            <p className="text-sm sm:text-base md:text-lg leading-relaxed mb-8 sm:mb-10 text-gray-300/90">
-                                I&apos;m Soham Darak, a full-stack developer passionate about building modern,
-                                high-performance applications with an intuitive user experience. I enjoy working
-                                with the latest technologies like Artificial Intelligence, Machine Learning, and
-                                cloud-based development, blending creativity with precision to deliver impactful
-                                solutions. With over three years of experience and more than 10 completed projects,
-                                I&apos;m committed to helping users and businesses grow in the digital era through
-                                functional, aesthetic, and scalable digital products.
-                            </p>
+                            <TextType
+                                text="Hi, I'm Soham! I'm a full-stack developer who loves crafting modern, snappy web applications that are genuinely pleasant to use. I'm always exploring new technologies—right now I'm super interested in integrating Artificial Intelligence and cloud solutions into everyday digital products. With over 10 projects under my belt and an eye for both design and functionality, my goal is to build software that not only looks great, but solves real problems and helps businesses grow."
+                                as="p"
+                                startOnVisible={true}
+                                loop={false}
+                                hideCursorWhileTyping={false}
+                                pauseDuration={100000} // Failsafe to guarantee text never deletes
+                                typingSpeed={18}
+                                className="text-lg sm:text-xl lg:text-[22px] font-normal leading-[1.8] sm:leading-[1.8] mb-6 sm:mb-8 text-gray-200 tracking-wide text-justify sm:text-left"
+                                cursorClassName="text-blue-500 font-bold"
+                            />
 
                             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start text-left gap-y-6 sm:gap-x-16 mb-4 w-full">
                                 <div>
